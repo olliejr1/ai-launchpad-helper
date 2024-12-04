@@ -1,12 +1,16 @@
+import { Benefits } from "@/components/Benefits";
+import { Calculator } from "@/components/Calculator";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Benefits } from "@/components/Benefits";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
       <Hero />
+      <section className="py-20 px-4 bg-secondary/30">
+        <Calculator />
+      </section>
       <Benefits />
     </div>
   );
