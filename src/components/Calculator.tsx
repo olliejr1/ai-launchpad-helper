@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 export const Calculator = () => {
   const { toast } = useToast();
   const [teamSize, setTeamSize] = useState(5);
-  const [monthlyBudget, setMonthlyBudget] = useState(20000);
+  const [monthlyBudget, setMonthlyBudget] = useState(10000);
   const [duration, setDuration] = useState(6);
 
   const calculateSavings = () => {
