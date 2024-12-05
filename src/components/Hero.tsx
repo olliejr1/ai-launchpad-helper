@@ -2,6 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
+  const scrollToCalculator = () => {
+    document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToProcess = () => {
+    document.getElementById('process')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary/50 to-white pt-16">
       <div className="container mx-auto px-4">
@@ -14,11 +22,18 @@ export const Hero = () => {
             We help founders cut MVP development costs in half while accelerating time-to-market using AI-enhanced product teams.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-accent hover:bg-accent/90 text-lg px-8 py-6">
+            <Button 
+              onClick={scrollToCalculator}
+              className="bg-accent hover:bg-accent/90 text-lg px-8 py-6"
+            >
               Calculate Your Savings
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <Button variant="outline" className="text-lg px-8 py-6">
+            <Button 
+              variant="outline" 
+              className="text-lg px-8 py-6"
+              onClick={scrollToProcess}
+            >
               Learn Our Process
             </Button>
           </div>

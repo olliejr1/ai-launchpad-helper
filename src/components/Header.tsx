@@ -2,6 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Box, Rocket } from "lucide-react";
 
 export const Header = () => {
+  const scrollToCalculator = () => {
+    document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -14,7 +18,10 @@ export const Header = () => {
           <a href="#process" className="text-sm hover:text-primary transition-colors">Process</a>
           <a href="#calculator" className="text-sm hover:text-primary transition-colors">Calculator</a>
         </nav>
-        <Button className="bg-accent hover:bg-accent/90">
+        <Button 
+          onClick={scrollToCalculator}
+          className="bg-accent hover:bg-accent/90"
+        >
           Contact Us
           <Rocket className="ml-2 w-4 h-4" />
         </Button>
