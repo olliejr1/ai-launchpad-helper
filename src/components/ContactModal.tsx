@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactModalProps {
   children: React.ReactNode;
@@ -13,24 +14,42 @@ export const ContactModal = ({ children }: ContactModalProps) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Here you would typically send this data to your backend
-    console.log({ firstName, email, company });
-    
-    toast({
-      title: "Thanks for reaching out!",
-      description: "We'll get back to you soon.",
-    });
-    
-    setOpen(false);
-    setFirstName("");
-    setEmail("");
-    setCompany("");
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          { first_name: firstName, email, company_name: company }
+        ]);
+      
+      if (error) throw error;
+      
+      toast({
+        title: "Thanks for reaching out!",
+        description: "We'll get back to you soon.",
+      });
+      
+      setOpen(false);
+      setFirstName("");
+      setEmail("");
+      setCompany("");
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -71,7 +90,9 @@ export const ContactModal = ({ children }: ContactModalProps) => {
               required
             />
           </div>
-          <Button type="submit" className="w-full">Submit</Button>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
