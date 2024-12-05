@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Box, Rocket } from "lucide-react";
+import { ContactModal } from "./ContactModal";
 
 export const Header = () => {
   const scrollToCalculator = () => {
@@ -18,13 +19,12 @@ export const Header = () => {
           <a href="#process" className="text-sm hover:text-primary transition-colors">Process</a>
           <a href="#calculator" className="text-sm hover:text-primary transition-colors">Calculator</a>
         </nav>
-        <Button 
-          onClick={scrollToCalculator}
-          className="bg-accent hover:bg-accent/90"
-        >
-          Contact Us
-          <Rocket className="ml-2 w-4 h-4" />
-        </Button>
+        <ContactModal>
+          <Button className="bg-accent hover:bg-accent/90">
+            Contact Us
+            <Rocket className="ml-2 w-4 h-4" />
+          </Button>
+        </ContactModal>
       </div>
     </header>
   );
