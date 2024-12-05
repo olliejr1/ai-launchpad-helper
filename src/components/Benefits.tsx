@@ -28,7 +28,7 @@ export const Benefits = () => {
     <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Why Choose LaunchAI?
+          Why Choose ProductBox?
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (
